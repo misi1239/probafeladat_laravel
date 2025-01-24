@@ -1,3 +1,23 @@
+<script setup>
+import create from "./create.vue";
+import {onMounted, ref} from "vue";
+
+let projects = ref([])
+
+onMounted( ()=> {
+    getProjects()
+})
+
+const getProjects = async () => {
+    try {
+        let response = await axios.get("/api/projects");
+        projects.value = response.data;
+    } catch (error) {
+        console.error("Error fetching projects:", error);
+    }
+};
+
+</script>
 <template>
     <section class="vh-100 gradient-custom-2">
         <div class="container py-5 h-100">
@@ -15,10 +35,7 @@
                                 <thead>
                                 <tr>
                                     <td colspan="2">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Add new Project" aria-label="add-new-project" aria-describedby="basic-addon1">
-                                            <button class="btn btn-success" type="button" id="basic-addon1">Add</button>
-                                        </div>
+                                        <create></create>
                                     </td>
                                 </tr>
                                 <tr>
@@ -27,23 +44,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="fw-normal">
+                                <tr v-for="project in projects" :key="project.id" class="fw-normal">
                                     <td class="align-middle">
-                                        <span>Call Sam For payments</span>
+                                        <span>{{ project.name }}</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="#!" data-bs-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
-                                    </td>
-                                </tr>
-                                <tr class="fw-normal">
-                                    <td class="align-middle">
-                                        <span>Call Sam For payments</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#!" data-bs-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
+                                        <a href="#!" data-bs-toggle="tooltip" title="Remove">
+                                            <i class="fas fa-trash-alt fa-lg text-danger"></i>
+                                        </a>
                                     </td>
                                 </tr>
-                                <!-- Add more rows here -->
                                 </tbody>
                             </table>
 
@@ -57,5 +67,5 @@
 </template>
 
 <style scoped lang="scss">
-    @use "../../../sass/MainPage/list.scss" as *;
+    @use "../../../sass/Project/list.scss" as *;
 </style>
