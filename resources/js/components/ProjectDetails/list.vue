@@ -160,12 +160,12 @@ onUnmounted(clearTrackingInterval);
         </div>
 
         <div class="my-3">
-            <button class="btn btn-success me-2" @click="startTrack">Start</button>
-            <button class="btn btn-danger" @click="stopTrack">Stop</button>
+            <button class="btn btn-success me-2" @click="startTrack" :disabled="latestDetail.isStarted && !latestDetail.isCompleted">Start</button>
+            <button class="btn btn-danger" @click="stopTrack" :disabled="!latestDetail.isStarted || latestDetail.isStopped">Stop</button>
         </div>
 
         <div>
-            <label for="note">Note:</label>
+            <label for="note">Update Note:</label>
             <textarea id="note" class="form-control" rows="3" v-model="note"></textarea>
         </div>
 
@@ -175,6 +175,27 @@ onUnmounted(clearTrackingInterval);
             </button>
         </div>
 
+        <div v-if = "!latestDetail.isCompleted">
+            <h3>Current project</h3>
+            <div class="project-details-container">
+                <table class="project-details-table">
+                    <thead>
+                    <tr>
+                        <th>Start</th>
+                        <th>Finish</th>
+                        <th>Note</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ latestDetail.start || '-' }}</td>
+                        <td>{{ latestDetail.finish || '-' }}</td>
+                        <td>{{ latestDetail.note || '-' }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div v-if="closedProjectDetails && Object.keys(closedProjectDetails).length > 0">
             <h3>Closed project details</h3>
             <div class="project-details-container">

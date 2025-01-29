@@ -4,6 +4,8 @@ import modal from "../modal.vue";
 import {ref, onMounted} from "vue";
 import {useRouter} from "vue-router";
 import projectDetails from "../ProjectDetails/list.vue";
+import axios from "axios";
+import DownloadExcel from "./download-excel.vue";
 
 const showModal = ref(false);
 const selectedProject = ref(null);
@@ -49,40 +51,44 @@ onMounted(async () => {
                             <div class="text-center pt-3 pb-2">
                                 <h2 class="my-4">Track Time For Projects</h2>
                             </div>
+
                             <div v-if="isLoading" class="d-flex justify-content-center align-items-center" style="height: 200px;">
                                 <div class="spinner-border text-light" role="status">
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                             </div>
-                            <table class="table table-hover text-white mb-0 text-center" v-else>
-                                <thead>
-                                <tr>
-                                    <td colspan="3">
-                                        <create @getProjects="getProjects"></create>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Project Name</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr
-                                    v-for="project in projects.data"
-                                    :key="project.id"
-                                    @click="openModal(project)"
-                                    class="fw-normal"
-                                    style="cursor: pointer;"
-                                >
-                                    <td class="align-middle">
-                                        <span>{{ project.id }}</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <span>{{ project.name }}</span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div v-else>
+                                <download-excel></download-excel>
+                                <table class="table table-hover text-white mb-0 text-center">
+                                    <thead>
+                                    <tr>
+                                        <td colspan="3">
+                                            <create @getProjects="getProjects"></create>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Project Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr
+                                        v-for="project in projects.data"
+                                        :key="project.id"
+                                        @click="openModal(project)"
+                                        class="fw-normal"
+                                        style="cursor: pointer;"
+                                    >
+                                        <td class="align-middle">
+                                            <span>{{ project.id }}</span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <span>{{ project.name }}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
