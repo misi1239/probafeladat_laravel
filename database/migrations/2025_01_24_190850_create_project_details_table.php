@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_tracks', function (Blueprint $table) {
+        Schema::create('project_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->timestamp('start')->nullable();
             $table->timestamp('finish')->nullable();
             $table->text('note')->nullable();
+            $table->boolean('isStarted')->default(false);
+            $table->boolean('isStopped')->default(false);
+            $table->boolean('isCompleted')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_tracks');
+        Schema::dropIfExists('project_details');
     }
 };

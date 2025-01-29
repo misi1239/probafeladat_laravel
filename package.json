@@ -20,8 +20,11 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.7.2",
+        "@vueuse/core": "^12.5.0",
+        "lodash": "^4.17.21",
         "vue": "^3.5.13",
         "vue-loader": "^17.4.2",
+        "vue-lodash": "^2.1.2",
         "vue-router": "^4.5.0"
     }
 }

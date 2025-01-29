@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static create(array $array)
+ * @method static find($id)
  */
 class Projects extends Model
 {
@@ -15,8 +16,8 @@ class Projects extends Model
 
     protected $fillable = ['name'];
 
-    public function projectTracks(): HasMany
+    public function projectDetails(): HasMany
     {
-        return $this->hasMany(ProjectTracks::class);
+        return $this->hasMany(ProjectDetails::class, 'project_id');
     }
 }

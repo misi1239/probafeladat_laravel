@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ProjectTracks extends Model
+/**
+ * @method static find(int $id)
+ */
+class ProjectDetails extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['project_id', 'start', 'finish', 'note'];
+    protected $fillable = ['project_id', 'start', 'finish', 'note', 'isStarted', 'isStopped', 'isCompleted'];
 
     public function projects(): BelongsTo
     {
-        return $this->belongsTo(Projects::class);
+        return $this->belongsTo(Projects::class, 'project_id');
     }
 }

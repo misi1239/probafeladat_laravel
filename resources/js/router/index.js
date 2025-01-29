@@ -8,6 +8,10 @@ const routes = [
         component: projectList
     },
     {
+        path: "/projects/:id",
+        component: projectList,
+    },
+    {
         path: "/:pathMatch(.*)*",
         component: notFound
     }

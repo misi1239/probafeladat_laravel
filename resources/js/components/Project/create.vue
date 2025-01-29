@@ -2,6 +2,10 @@
 import { ref } from "vue";
 import axios from "axios";
 
+const emit = defineEmits({
+        getProjects: Object
+    }
+);
 let nameData = ref("");
 let errorMessage = ref("");
 
@@ -16,11 +20,17 @@ const saveProject = async () => {
             name: nameData.value,
         });
 
-        alert("Project successfully saved!");
         nameData.value = "";
         errorMessage.value = "";
+        emit("getProjects", Object);
     } catch (error) {
         errorMessage.value = "An error occurred while saving the project!";
+    }
+};
+
+const handleKeyUp = (event) => {
+    if (event.key === "Enter") {
+        saveProject();
     }
 };
 </script>
@@ -34,6 +44,7 @@ const saveProject = async () => {
             placeholder="Add new Project"
             aria-label="add-new-project"
             aria-describedby="basic-addon1"
+            @keyup="handleKeyUp"
         />
         <button class="btn btn-success" type="button" id="basic-addon1" @click="saveProject">
             Add
