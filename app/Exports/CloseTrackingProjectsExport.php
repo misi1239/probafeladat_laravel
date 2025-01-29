@@ -44,7 +44,7 @@ class CloseTrackingProjectsExport implements FromCollection, WithHeadings
             : 'N/A';
 
         $data[] = [
-            'Project', 'Start', 'Finish', 'Duration', 'Memo', 'Date Range: '
+            'Project', 'Start', 'Finish', 'Duration', 'Memo', 'Exported Period: '
             . $dateRange . ' | Exported At: ' . Carbon::now()->format('Y-m-d H:i:s')
         ];
 
