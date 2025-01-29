@@ -190,7 +190,7 @@ onUnmounted(clearTrackingInterval);
                     <tr>
                         <td>{{ latestDetail.start || '-' }}</td>
                         <td>{{ latestDetail.finish || '-' }}</td>
-                        <td>{{ latestDetail.note || '-' }}</td>
+                        <td><pre>{{ latestDetail.note || '-' }}</pre></td>
                     </tr>
                     </tbody>
                 </table>
@@ -211,7 +211,7 @@ onUnmounted(clearTrackingInterval);
                     <tr v-for="detail in closedProjectDetails" :key="detail.id">
                         <td>{{ detail.start || "-" }}</td>
                         <td>{{ detail.finish || "-" }}</td>
-                        <td>{{ detail.note || "-" }}</td>
+                        <td><pre>{{ detail.note || '-' }}</pre></td>
                     </tr>
                     </tbody>
                 </table>

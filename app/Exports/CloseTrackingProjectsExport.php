@@ -55,7 +55,7 @@ class CloseTrackingProjectsExport implements FromCollection, WithHeadings
                     'Start' => $detail->start ? Carbon::parse($detail->start)->format('Y-m-d H:i:s') : 'N/A',
                     'Finish' => $detail->finish ? Carbon::parse($detail->finish)->format('Y-m-d H:i:s') : 'N/A',
                     'Duration' => $this->calculateDetailsDuration($detail),
-                    'Memo' => $detail->note,
+                    'Memo' => $detail->note ? str_replace("\n", PHP_EOL, $detail->note) : 'N/A',
                 ];
             }
         }
