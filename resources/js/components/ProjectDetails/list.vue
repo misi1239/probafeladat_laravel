@@ -165,7 +165,7 @@ onUnmounted(clearTrackingInterval);
         </div>
 
         <div>
-            <label for="note">Note:</label>
+            <label for="note">Update Note:</label>
             <textarea id="note" class="form-control" rows="3" v-model="note"></textarea>
         </div>
 
