@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Project\CreateAction;
-use App\Http\Controllers\Api\Project\ExportController;
+use App\Http\Controllers\Api\Project\ExportAction;
 use App\Http\Controllers\Api\Project\ListAction;
 use App\Http\Controllers\Api\ProjectDetails\CreateAction as ProjectDetailsCreateAction;
 use App\Http\Controllers\Api\ProjectDetails\GetCompletedDetailsAction;
@@ -15,4 +15,4 @@ Route::post('/projects/{id}/details/create', ProjectDetailsCreateAction::class);
 Route::patch('/projects/{projectId}/details/update/{id}', ProjectDetailsUpdateAction::class);
 Route::get('/projects/{projectId}/details/latest', GetLatestProjectDetailAction::class);
 Route::get('/projects/{projectId}/details/completed', GetCompletedDetailsAction::class);
-Route::get('/export-closed-project', ExportController::class)->name('exportClosedProject');
+Route::get('/export-closed-project', ExportAction::class)->name('exportClosedProject');
